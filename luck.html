@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>幸运转盘</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        .main{margin: 0 auto;width: 500px; height: 500px;}
+        .jifen {height: 40px;margin-top:20px; padding-left: 60px;}
+        .jifen input {height: 30px; width: 60px;text-align: center;margin: 4px; border: 1px solid #ccc;}
+        #btn{margin-left: 60px;}
+    </style>
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script>
+        $(function(){
+            var tab = $("#turntable");
+            var pointer = $("#pointer");
+            var wt = tab.width();
+            var ht = tab.height();
+            var wp = pointer.width();
+            var hp = pointer.height();
+            pointer.offset({"left":(wt-wp)/2+tab.offset().left,"top":(ht-hp)/2+tab.offset().top});
+            var turn = false;
+            var deg =0;
+            var intervalId;
+            clearInterval(intervalId);
+            $("#text").val(parseInt(Math.random()*6000))
+            $("#btn").click(function(){
+
+                turn = !turn;
+                if(turn){
+                    intervalId = setInterval(function(){
+                        deg +=120;
+                        tab.css("transform","rotate("+ deg +"deg)")
+                    },60)
+                }else{
+                    clearInterval(intervalId);
+                }
+
+
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="jifen">
+    本次购物获得<input type="text" id="text">积分
+</div>
+<input type="button" id="btn" value="抽奖">
+<div class="main">
+    <img src="images/turntable.png" id="turntable" >
+    <img src="images/pointer.png" id="pointer">
+</div>
+
+</body>
+</html>
